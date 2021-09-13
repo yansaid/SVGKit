@@ -278,9 +278,11 @@
 
 -(Node*) appendChild:(Node*) newChild
 {
-    if (!newChild) {
-        [NSException raise:@"newChild is null" format:@"object cannot be nil"];
+#if TARGET_OS_IOS
+    if (@available(iOS 12.0, *)) {} else {
+        @throw [[NSException alloc] initWithName:@"Error" reason:@"object cannot be nil" userInfo:nil];
     }
+#endif
     
 	[self.childNodes.internalArray removeObject:newChild]; // required by spec
 	[self.childNodes.internalArray addObject:newChild];
