@@ -279,7 +279,8 @@
 -(Node*) appendChild:(Node*) newChild
 {
 #if TARGET_OS_IOS
-    if (@available(iOS 12.0, *)) {} else {
+    if (@available(iOS 12.0, *)) {}
+    else if (@available(iOS 11.0, *)) {
         @throw [[NSException alloc] initWithName:@"Error" reason:@"object cannot be nil" userInfo:nil];
     }
 #endif
